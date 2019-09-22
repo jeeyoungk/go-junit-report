@@ -11,6 +11,7 @@ import (
 
 var (
 	noXMLHeader   bool
+	fullPackage   bool
 	packageName   string
 	goVersionFlag string
 	setExitCode   bool
@@ -21,6 +22,7 @@ func init() {
 	flag.StringVar(&packageName, "package-name", "", "specify a package name (compiled test have no package name in output)")
 	flag.StringVar(&goVersionFlag, "go-version", "", "specify the value to use for the go.version property in the generated XML")
 	flag.BoolVar(&setExitCode, "set-exit-code", false, "set exit code to 1 if tests failed")
+	flag.BoolVar(&fullPackage, "full-package", false, "if true, output full package name")
 }
 
 func main() {
@@ -39,7 +41,7 @@ func main() {
 	}
 
 	// Write xml
-	err = formatter.JUnitReportXML(report, noXMLHeader, goVersionFlag, os.Stdout)
+	err = formatter.JUnitReportXML(report, noXMLHeader, fullPackage, goVersionFlag, os.Stdout)
 	if err != nil {
 		fmt.Printf("Error writing XML: %s\n", err)
 		os.Exit(1)

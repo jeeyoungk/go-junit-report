@@ -23,6 +23,7 @@ type TestCase struct {
 	reportName  string
 	report      *parser.Report
 	noXMLHeader bool
+	fullPackage bool
 	packageName string
 }
 
@@ -1554,7 +1555,7 @@ func testJUnitFormatter(t *testing.T, goVersion string) {
 
 		var junitReport bytes.Buffer
 
-		if err = formatter.JUnitReportXML(testCase.report, testCase.noXMLHeader, goVersion, &junitReport); err != nil {
+		if err = formatter.JUnitReportXML(testCase.report, testCase.noXMLHeader, testCase.fullPackage, goVersion, &junitReport); err != nil {
 			t.Fatal(err)
 		}
 
