@@ -221,7 +221,7 @@ func Parse(r io.Reader, pkgName string) (*Report, error) {
 			if test == nil {
 				continue
 			}
-			buffers[cur] = append(buffers[cur], line)
+			buffers[cur] = append(buffers[cur], matches[2])
 			test.Output = append(test.Output, matches[2])
 		} else if strings.HasPrefix(line, "# ") {
 			// indicates a capture of build output of a package. set the current build package.
